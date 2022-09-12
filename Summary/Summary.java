@@ -22,9 +22,9 @@ public class Summary {
                     + "4. Transfer from an Account\n"
                     + "5. Display Account Information\n"
                     + "6. Exit\n";
-            int choice,ID,choi,ch;
+            int choice,ID,choi,ch,ch1,ch2,choosen;
             String Name;
-            double balance,withdraw_amount,deposit_amount;
+            double balance,withdraw_amount,deposit_amount,transfer_amount;
             Scanner scanner = new Scanner(System.in);
             boolean active = true,x;
             while (active){
@@ -146,30 +146,54 @@ public class Summary {
                     choi=scanner.nextInt();
                     switch (choi) {
                         case 1:
-                            System.out.println("Choose an Account\n");
+                            System.out.println("Choose an Account to transfer from>> ");
                             for (int i = 0 ; i<acc_index;i++) {
                                 System.out.println(String.valueOf(i)+". "+accounts[i]);
                             }
-                            ch = scanner.nextInt();
-                            System.out.println("Enter the Amount you want to deposit>>");
-                            deposit_amount = scanner.nextDouble();
-                            accounts[ch].deposit(deposit_amount);
+                            ch1 = scanner.nextInt();
+                            choosen = ch1;
+                            System.out.println("Choose an Account to transfer to>> ");
+                            for (int i = 0 ; i<acc_index;i++) {
+                                if (i==choosen){
+                                    continue;
+                                }
+                                System.out.println(String.valueOf(i)+". "+accounts[i]);
+                            }
+                            ch2 = scanner.nextInt();
+                            System.out.println("Enter the Amount you want to transfer>>");
+                            transfer_amount = scanner.nextDouble();
+                            x = accounts[ch1].transfer(transfer_amount,accounts[ch2]);
+                            if (x){
+                                System.out.println("Successfully Transfered");
+                            }else{
+                                System.out.println("Insufficcient Amount !!");
+                            }
                             break;
                         case 2:
-                            System.out.println("Choose an Account\n");
+                            System.out.println("Choose an Account to transfer from>> ");
                             for (int i = 0 ; i<c_accounts;i++) {
                                 System.out.println(String.valueOf(i)+". "+caccounts[i]);
                             }
-                            ch = scanner.nextInt();
-                            System.out.println("Enter the Amount you want to deposit>>");
-                            deposit_amount = scanner.nextDouble();
-                            caccounts[ch].deposit(deposit_amount);
-                            break;
-                        default:
-                            System.out.println("Wrong Choice");
-                            break;
+                            ch1 = scanner.nextInt();
+                            choosen = ch1;
+                            System.out.println("Choose an Account to transfer to>> ");
+                            for (int i = 0 ; i<c_accounts;i++) {
+                                if (i==choosen){
+                                    continue;
+                                }
+                                System.out.println(String.valueOf(i)+". "+caccounts[i]);
+                            }
+                            ch2 = scanner.nextInt();
+                            System.out.println("Enter the Amount you want to transfer>>");
+                            transfer_amount = scanner.nextDouble();
+                            x = caccounts[ch1].transfer(transfer_amount,caccounts[ch2]);
+                            if (x){
+                                System.out.println("Successfully Transfered");
+                            }else{
+                                System.out.println("Insufficcient Amount !!");
+                            }
                     }
-                    break;
+                            break;
                 case 5:
                     System.out.println("Choose Account Type\n"
                             + "1. Saving Account\n"

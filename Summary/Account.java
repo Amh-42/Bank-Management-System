@@ -28,7 +28,7 @@ public class Account{
         }
         return false;
     }
-    public boolean transfer(double amount){
+    public boolean transfer(double amount,Account transfer_to){
         return true;
     }
     public int getID(){
