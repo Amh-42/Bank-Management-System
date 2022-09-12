@@ -19,17 +19,22 @@ public class Account{
         this.balance = balance;
     }
     public void deposit(double amount){
-        
+        setBalance(this.getBalance()+amount);
     }
     public boolean withdraw(double amount){
         if (this.balance>=amount){
-            this.balance-=amount;
+            setBalance(balance-amount);
             return true;
         }
         return false;
     }
     public boolean transfer(double amount,Account transfer_to){
-        return true;
+        if (this.balance>=amount){
+            setBalance(balance-amount);
+            transfer_to.deposit(amount);
+            return true;
+        }
+        return false;
     }
     public int getID(){
         return this.ID;
