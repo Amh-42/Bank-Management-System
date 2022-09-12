@@ -55,6 +55,21 @@ public class CAccount extends Account{
             setBalance(balance+amount);
         }
     }
+    public boolean transfer(double amount,CAccount transfer_to){
+        if ((this.overdraft_limit+this.balance)<amount){
+            return false;
+        }else if(this.balance<amount){
+            setOverdrawn(amount-balance);
+            setBalance(0);
+            transfer_to.deposit(amount);
+            
+        }else{
+            setBalance(balance-amount);
+            transfer_to.deposit(amount);
+        }
+        return true;
+        
+    }
     @Override
     public void display(){
         System.out.println("Hello "
